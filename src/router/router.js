@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 // Layouts
 import HomeLayout from '../Layouts/HomeLayout.vue'
-import SubLayout from '../Layouts/SubLayout.vue'
 
 const routes = [
   {
@@ -11,15 +10,25 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'Home',
-        component: () => import('../components/Home.vue')
+        name: 'Landing',
+        component: () => import('../components/Landing.vue')
+      },
+      {
+        path: 'creator',
+        name: 'Creator',
+        component: () => import('../components/VideoEditor.vue')
       }
     ]
   },
   {
-    path: '',
-    component: SubLayout,
+    path: '/developer',
+    component: HomeLayout,
     children: [
+      {
+        path: '',
+        name: 'Home',
+        component: () => import('../components/DeveloperPage.vue')
+      },
       {
         path: 'my-projects',
         name: 'Projects',

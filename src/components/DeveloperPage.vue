@@ -1,5 +1,6 @@
-<script setup>
+﻿<script setup>
 import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import Footer from './MyProfile/Footer.vue';
 import MyProfile from './MyProfile/myProfile.vue';
 import Statistics from './MyProfile/Statistics.vue';
@@ -10,6 +11,8 @@ import Techstack from './MyProfile/Techstack.vue';
 import Socials from './MyProfile/Socials.vue';
 import Recommendation from './MyProfile/Recommendation.vue';
 import Education from './MyProfile/Education.vue';
+
+const router = useRouter();
 
 onMounted(() => {
     setTimeout(() => {
@@ -67,8 +70,33 @@ onMounted(() => {
                 </div>
             </div>
             <Footer />
-        </div>
-    </div>
+
+            <div class="fixed right-4 bottom-4 z-50 rounded-full bg-zinc-950/95 p-3 shadow-[0_20px_60px_rgba(0,0,0,0.3)] backdrop-blur-md transition hover:shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
+                <div class="flex flex-col gap-3 md:flex-row md:items-center">
+                    <button
+                        type="button"
+                        @click="router.push('/')"
+                        class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                        <span>Back</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        @click="router.push('/creator')"
+                        class="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-zinc-800"
+                    >
+                        <span>Check my video editor portfolio</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-4-4l4 4-4 4" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>    </div>
 </template>
 
 <style>

@@ -71,8 +71,8 @@ import Footer from './MyProfile/Footer.vue';
                 <div class="rounded-2xl border border-zinc-200 bg-white/90 p-5 shadow-sm dark:border-zinc-800 dark:bg-[#141414]/90">
                     <h3 class="mb-3 text-base font-semibold">Tools</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="rounded-full border border-zinc-300 px-2.5 py-1 text-xs dark:border-zinc-700">GIT</span>
-                        <span class="rounded-full border border-zinc-300 px-2.5 py-1 text-xs dark:border-zinc-700">Github</span>
+                        <span class="rounded-full border border-zinc-300 px-2.5 py-1 text-xs dark:border-zinc-700">Git</span>
+                        <span class="rounded-full border border-zinc-300 px-2.5 py-1 text-xs dark:border-zinc-700">GitHub</span>
                         <span class="rounded-full border border-zinc-300 px-2.5 py-1 text-xs dark:border-zinc-700">Postman</span>
                         <span class="rounded-full border border-zinc-300 px-2.5 py-1 text-xs dark:border-zinc-700">VS Code</span>
                         <span class="rounded-full border border-zinc-300 px-2.5 py-1 text-xs dark:border-zinc-700">Google Cloud</span>

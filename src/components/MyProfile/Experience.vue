@@ -20,12 +20,7 @@
                     <p class="text-sm font-semibold text-zinc-800 dark:text-zinc-200">Full Stack Developer</p>
                     <h3 class="mt-1 text-xs text-zinc-600 dark:text-zinc-400">DOST-FNRI</h3>
                 </li>
-                <li class="mb-8 ms-4">
-                    <div class="absolute -start-1.5 mt-1 h-3 w-3 rounded-full border border-zinc-100 bg-zinc-300 dark:border-zinc-800 dark:bg-zinc-700"></div>
-                    <time class="mb-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-500 dark:text-zinc-400">2022</time>
-                    <p class="text-sm font-semibold text-zinc-800 dark:text-zinc-200">Python Machine Learning Developer</p>
-                    <h3 class="mt-1 text-xs text-zinc-600 dark:text-zinc-400">DBP Service Corporation</h3>
-                </li>
+               
                 <li class="mb-8 ms-4">
                     <div class="absolute -start-1.5 mt-1 h-3 w-3 rounded-full border border-zinc-100 bg-zinc-300 dark:border-zinc-800 dark:bg-zinc-700"></div>
                     <time class="mb-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-500 dark:text-zinc-400">2021</time>
