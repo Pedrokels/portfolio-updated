@@ -71,7 +71,7 @@ onMounted(() => {
             </div>
             <Footer />
 
-            <div class="fixed right-4 bottom-4 z-50 rounded-full bg-zinc-950/95 p-3 shadow-[0_20px_60px_rgba(0,0,0,0.3)] backdrop-blur-md transition hover:shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
+             <div class="fixed right-4 bottom-4 z-50 rounded-full bg-transparent dark:bg-transparent ">
                 <div class="flex flex-col gap-3 md:flex-row md:items-center">
                     <button
                         type="button"
@@ -96,7 +96,8 @@ onMounted(() => {
                     </button>
                 </div>
             </div>
-        </div>    </div>
+        </div>   
+         </div>
 </template>
 
 <style>
