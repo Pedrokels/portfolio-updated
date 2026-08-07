@@ -115,7 +115,7 @@ onMounted(() => {
              I'm a nature and adventure content creator based in the Philippines, telling stories through short-form reels and edits. I turn travel, landscapes, and quiet in-between moments into videos that make people feel something. Editing is where I get to be creative and productive at once — it's the work that keeps me grounded and lets me share the places and stories that matter to me.
             <br>
                       <br>
-                      Currently seeking video editing work — especially projects involving travel, nature, or short-form storytelling. Open to freelance and collaboration opportunities.
+                      Currently seeking video editing work especially projects involving travel, nature, or short-form storytelling. Open to freelance and collaboration opportunities.
             </p>
           </div>
 
@@ -143,6 +143,8 @@ onMounted(() => {
     <span class="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">CapCut</span>
     <span class="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">Adobe Premiere Pro</span>
     <span class="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">DaVinci Resolve</span>
+    <span class="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">Filmora</span>
+    <span class="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">Canva Video</span>
   </div>
 </div>
 
