@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import Footer from './MyProfile/Footer.vue';
 import MyProfileVideo from './MyProfile/myProfileVideo.vue';
@@ -51,18 +51,15 @@ const reels = [
     reactions: '1.3',
     shares: '290',
     title: 'Top Reel',
-      forceLink: true,
- 
+    forceLink: true,
   },
-    {
-    url: 'https://www.facebook.com/reel/1682646302829089/',
-    views: '42K',
-    reactions: '226',
-    shares: '5.5k',
+  {
+    url: 'https://www.facebook.com/reel/2104513353835841/',
+    views: '—',
+    reactions: '—',
+    shares: '—',
     title: 'Top Reel',
-      forceLink: true,
-
-
+    forceLink: true,
   }
 ];
 
@@ -74,27 +71,12 @@ const closeReel = () => {
   activeReel.value = null;
 };
 
-// On mount, check embeddability for each reel using the local check-embed server.
-onMounted(() => {
-  // If the server isn't running or the request fails, do nothing (leave the iframe). This is a best-effort enhancement.
-  reels.forEach(async (reel) => {
-    try {
-      const checkUrl = `http://localhost:3001/check?href=${encodeURIComponent(reel.url)}`;
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 3000);
-      const res = await fetch(checkUrl, { signal: controller.signal });
-      clearTimeout(timeout);
-      if (!res.ok) return; // leave as-is on non-200
-      const json = await res.json();
-      if (json && json.embeddable === false) {
-        // mark to use the link fallback instead of showing the iframe
-        reel.forceLink = true;
-      }
-    } catch (err) {
-      // silent: server likely not running or network error; do not change behavior
-    }
-  });
-});
+// NOTE: embeddability can't be reliably checked from the deployed site itself —
+// Facebook's plugin endpoint doesn't allow cross-origin reads of its response body,
+// and a "check-embed" server only running on localhost is unreachable once this page
+// is live. If a specific reel is confirmed to be blocked by Facebook, just add
+// `forceLink: true` to that reel's entry above and it'll render as a link-out card
+// instead of a broken embed.
 </script>
 
 <template>
@@ -203,8 +185,8 @@ onMounted(() => {
               </a>
             </div>
 
-            <div class="mt-6 grid gap-x-6 gap-y-6 justify-center sm:[grid-template-columns:repeat(3,minmax(0,340px))]">
-              <div v-for="reel in reels" :key="reel.url" class="cursor-pointer w-full" @click="openReel(reel)">
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 justify-items-center">
+              <div v-for="reel in reels" :key="reel.url" class="cursor-pointer w-full max-w-[340px]" @click="openReel(reel)">
                 <div class="relative rounded-3xl border border-zinc-200 dark:border-zinc-800 p-1 bg-white/95 dark:bg-zinc-950 overflow-hidden" :class="reel.highlight ? 'shadow-[0_0_0_4px_rgba(255,255,255,0.08)] border-white/80 dark:border-white/20' : ''">
                  <template v-if="!reel.forceLink">
                    <FacebookReelEmbed :reelUrl="reel.url" :highlight="reel.highlight" :width="340" :height="600" />

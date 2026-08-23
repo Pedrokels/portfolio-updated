@@ -46,7 +46,8 @@ const wrapperStyle = computed(() => {
   return {
     maxWidth: defaultWidth.value + 'px',
     aspectRatio: `${defaultWidth.value}/${defaultHeight.value}`,
-    width: '100%'
+    width: '100%',
+    minWidth: 0
   };
 });
 
