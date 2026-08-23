@@ -33,13 +33,19 @@
                     <p class="text-sm font-semibold text-zinc-800 dark:text-zinc-200">Customer Support / Operations Support</p>
                     <h3 class="mt-1 text-xs text-zinc-600 dark:text-zinc-400">Sutherland Global Services</h3>
                 </li>
-                <li class="ms-4 mb-4">
+                 <li class="mb-8 ms-4">
                     <div class="absolute -start-1.5 mt-1 h-3 w-3 rounded-full border border-zinc-100 bg-zinc-300 dark:border-zinc-800 dark:bg-zinc-700"></div>
                     <time class="mb-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-500 dark:text-zinc-400">2020</time>
-                    <p class="text-sm font-semibold text-zinc-800 dark:text-zinc-200">BS Information Technology</p>
+            <p class="text-sm font-semibold text-zinc-800 dark:text-zinc-200">BS Information Technology</p>
                     <h3 class="mt-1 text-xs text-zinc-600 dark:text-zinc-400">SSC - Bulan Campus</h3>
                 </li>
-                
+            
+                     <li class="ms-4 mb-4">
+                    <div class="absolute -start-1.5 mt-1 h-3 w-3 rounded-full border border-zinc-100 bg-zinc-300 dark:border-zinc-800 dark:bg-zinc-700"></div>
+                    <time class="mb-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-500 dark:text-zinc-400">2019</time>
+                    <p class="text-sm font-semibold text-zinc-800 dark:text-zinc-200">Payroll System Developer & Support</p>
+                    <h3 class="mt-1 text-xs text-zinc-600 dark:text-zinc-400">Provincial Human Resouruce Management Office</h3>
+                </li>
             </ol>
         </div>
     </div>
