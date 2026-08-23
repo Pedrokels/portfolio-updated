@@ -52,17 +52,12 @@ const wrapperStyle = computed(() => {
 });
 
 const iframeStyle = computed(() => {
-  // Position iframe absolutely and slightly over-scale so the visible video fills the card with no bottom black band
-  const scale = props.highlight ? 1 : 1;
-  const translateY = props.highlight ? '0%' : '0%';
   return {
     position: 'absolute',
-    top: translateY,
+    top: '0%',
     left: '0',
     width: '100%',
     height: '120%',
-    transform: `scale(${scale})`,
-    transformOrigin: 'center top',
     border: 'none'
   };
 });
