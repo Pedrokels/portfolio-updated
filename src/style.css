@@ -20,6 +20,17 @@
     --muted: 102 102 102;         /* #666666 — 5.7:1 on white */
     --faint: 160 160 160;         /* decorative only (numbers, rules) */
 
+    /* Identity accents — one per side of the portfolio. Light mode uses deeper
+       shades so accent text still clears 4.5:1 on white, and drops the glow. */
+    --accent-fsd: 18 129 63;      /* #12813F — lime, deepened for white (5.0:1) */
+    --accent-video: 200 75 10;    /* #C84B0A — orange, deepened for white (4.7:1) */
+    --accent-glow: 0;             /* alpha of the neon halo */
+    --grid-accent: 0.45;          /* alpha of the tinted grid lines */
+
+    /* The active accent. Monochrome until a page or row opts in with
+       .accent-fsd / .accent-video, so unscoped UI stays black & white. */
+    --accent: var(--foreground);
+
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     --duration-fast: 200ms;
     --duration-normal: 400ms;
@@ -39,6 +50,21 @@
     --foreground: 245 245 245;    /* #F5F5F5 */
     --muted: 154 154 154;         /* #9A9A9A — 7.4:1 on #0A0A0A */
     --faint: 90 90 90;
+
+    --accent-fsd: 98 238 127;     /* #62EE7F — neon lime, Nuxt-adjacent */
+    --accent-video: 255 122 31;   /* #FF7A1F — neon orange */
+    --accent-glow: 0.35;
+    --grid-accent: 0.5;
+
+    --accent: var(--foreground);
+  }
+
+  .accent-fsd {
+    --accent: var(--accent-fsd);
+  }
+
+  .accent-video {
+    --accent: var(--accent-video);
   }
 
   html {
@@ -117,7 +143,7 @@
   /* Animated underline for inline and footer links. */
   .link {
     @apply relative inline-flex items-center gap-1 text-foreground;
-    background-image: linear-gradient(currentColor, currentColor);
+    background-image: linear-gradient(rgb(var(--accent)), rgb(var(--accent)));
     background-repeat: no-repeat;
     background-position: 0 100%;
     background-size: 0% 1px;
@@ -127,6 +153,21 @@
   .link:hover,
   .link:focus-visible {
     background-size: 100% 1px;
+  }
+
+  /* Trailing arrows pick up the page's identity color. */
+  .link svg {
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .link:hover svg,
+  .link:focus-visible svg {
+    color: rgb(var(--accent));
+  }
+
+  /* Barely-there neon halo for accent details. Dark mode only (--accent-glow is 0 in light). */
+  .accent-glow {
+    filter: drop-shadow(0 0 6px rgb(var(--accent) / var(--accent-glow)));
   }
 
   .link-muted {
@@ -169,7 +210,24 @@
     @apply grid-mask absolute inset-0 overflow-hidden;
   }
 
-  .grid-drift > .grid-lines {
+  /* Identity tint: the same lines in the accent color, visible only inside a small
+     static spot (--spot-x / --spot-y), so the drifting grid passes *through* the color. */
+  .grid-spot {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    mask-image: radial-gradient(circle var(--spot-size, 16rem) at var(--spot-x, 80%) var(--spot-y, 30%), #000, transparent);
+    -webkit-mask-image: radial-gradient(circle var(--spot-size, 16rem) at var(--spot-x, 80%) var(--spot-y, 30%), #000, transparent);
+  }
+
+  .grid-spot > .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(var(--accent) / var(--grid-accent)) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--accent) / var(--grid-accent)) 1px, transparent 1px);
+  }
+
+  .grid-drift > .grid-lines,
+  .grid-spot > .grid-lines {
     position: absolute;
     inset: 0 -64px -64px 0;
     animation: grid-drift 22s linear infinite;
@@ -329,6 +387,7 @@
   .intro-nav,
   .intro-fade,
   .grid-drift > .grid-lines,
+  .grid-spot > .grid-lines,
   .mark-float,
   .spin-once,
   .identity-float,

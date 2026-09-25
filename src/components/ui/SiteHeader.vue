@@ -82,7 +82,7 @@ onBeforeUnmount(() => {
           class="group/back -ml-2 inline-flex h-9 shrink-0 items-center gap-1.5 rounded px-2 text-sm text-muted transition-colors duration-fast ease-out hover:text-foreground"
           aria-label="Back to home"
         >
-          <Icon name="arrow-left" class="transition-transform duration-normal ease-out group-hover/back:-translate-x-1" />
+          <Icon name="arrow-left" class="transition-[transform,color] duration-normal ease-out group-hover/back:-translate-x-1 group-hover/back:text-accent" />
           <span class="hidden sm:inline" aria-hidden="true">Home</span>
         </router-link>
         <span v-if="back" class="h-4 w-px shrink-0 bg-border" aria-hidden="true" />
@@ -109,7 +109,7 @@ onBeforeUnmount(() => {
               >
                 {{ link.label }}
                 <span
-                  class="absolute -bottom-1.5 left-0 h-px w-full origin-left bg-foreground transition-transform duration-normal ease-out"
+                  class="absolute -bottom-1.5 left-0 h-px w-full origin-left bg-accent transition-transform duration-normal ease-out"
                   :class="active === link.id ? 'scale-x-100' : 'scale-x-0'"
                   aria-hidden="true"
                 />
@@ -155,7 +155,7 @@ onBeforeUnmount(() => {
               class="flex items-baseline gap-4 py-3 text-2xl font-medium tracking-tight text-foreground"
               @click.prevent="go(link.id)"
             >
-              <span class="tabular text-label text-faint" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
+              <span class="tabular text-label text-accent" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
               {{ link.label }}
             </a>
           </li>

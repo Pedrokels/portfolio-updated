@@ -25,7 +25,7 @@ const resume = resumeLink(developer.resumeUrl, site.role)
 </script>
 
 <template>
-  <div id="top" class="outline-none">
+  <div id="top" class="accent-fsd outline-none">
     <SiteHeader :brand="site.name" brand-to="/developer" :links="links" back />
 
     <main id="main">

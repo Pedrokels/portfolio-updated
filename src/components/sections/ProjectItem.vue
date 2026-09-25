@@ -23,7 +23,7 @@ const gallery = ref(null)
     <!-- Text -->
     <div v-reveal class="lg:col-span-5" :class="reversed ? 'lg:order-2 lg:col-start-8' : ''">
       <p class="eyebrow flex items-center gap-3">
-        <span class="tabular text-faint" aria-hidden="true">{{ number }}</span>
+        <span class="tabular text-accent" aria-hidden="true">{{ number }}</span>
         <span>{{ project.kind }}</span>
       </p>
 
@@ -44,7 +44,7 @@ const gallery = ref(null)
           @click="gallery.open()"
         >
           <span class="link">View screenshots</span>
-          <Icon name="arrow-right" class="transition-transform duration-normal ease-out group-hover/cta:translate-x-1 group-hover:translate-x-1" />
+          <Icon name="arrow-right" class="transition-[transform,color] duration-normal ease-out group-hover/cta:translate-x-1 group-hover/cta:text-accent group-hover:translate-x-1" />
         </button>
         <p v-else class="text-sm text-muted">
           {{ project.role ? `${project.role} · ` : '' }}No public screenshots

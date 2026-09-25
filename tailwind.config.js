@@ -17,7 +17,9 @@ export default {
         border: token('border'),
         'border-strong': token('border-strong'),
         surface: token('surface'),
-        'surface-2': token('surface-2')
+        'surface-2': token('surface-2'),
+        // Scoped identity color: lime on /developer, orange on /creator, foreground elsewhere.
+        accent: token('accent')
       },
       fontFamily: {
         sans: [

@@ -11,7 +11,7 @@ defineProps({
     v-reveal
     :href="resume.href"
     v-bind="resume.attrs"
-    class="group flex items-center justify-between gap-6 rounded-md border border-border p-6 transition-colors duration-normal ease-out hover:border-border-strong hover:bg-surface md:p-8"
+    class="group flex items-center justify-between gap-6 rounded-md border border-border p-6 transition-colors duration-normal ease-out hover:border-accent/40 hover:bg-surface md:p-8"
   >
     <span>
       <span class="block text-heading font-semibold text-foreground">Want the complete background?</span>
@@ -21,7 +21,7 @@ defineProps({
     </span>
     <span class="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-foreground">
       <span class="hidden sm:inline">{{ resume.label }}</span>
-      <Icon name="arrow-right" :size="20" class="transition-transform duration-normal ease-out group-hover:translate-x-1" />
+      <Icon name="arrow-right" :size="20" class="transition-[transform,color] duration-normal ease-out group-hover:translate-x-1 group-hover:text-accent" />
     </span>
     <span v-if="resume.available" class="sr-only">(opens in a new tab)</span>
   </a>

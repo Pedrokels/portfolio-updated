@@ -29,7 +29,7 @@ const videoSrc = (video) =>
 </script>
 
 <template>
-  <div id="top" class="outline-none">
+  <div id="top" class="accent-video outline-none">
     <SiteHeader :brand="site.alias" brand-to="/creator" :links="links" back />
 
     <main id="main">

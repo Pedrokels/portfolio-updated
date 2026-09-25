@@ -18,9 +18,17 @@ defineProps({
 
 <template>
   <section class="relative overflow-hidden pb-24 pt-40 md:pb-32 md:pt-48" aria-labelledby="hero-title">
-    <!-- Same drifting grid as the homepage. -->
+    <!-- Same drifting grid as the homepage, tinted with the page accent around the illustration. -->
     <div class="grid-drift intro-fade pointer-events-none" style="--d: 750ms" aria-hidden="true">
       <div class="grid-lines" />
+      <!-- Spot centred on the illustration: beside the name on small screens, then on the
+           desktop copy (container right edge − 3rem inset − half the illustration width). -->
+      <div
+        v-if="identity"
+        class="grid-spot [--spot-x:88%] [--spot-y:16rem] lg:[--spot-x:calc(50%+min(600px,50%)-10.5rem)] lg:[--spot-y:23rem] xl:[--spot-x:calc(50%+min(600px,50%)-12.5rem)] xl:[--spot-y:24rem]"
+      >
+        <div class="grid-lines" />
+      </div>
     </div>
 
     <div class="container-site relative">
@@ -42,6 +50,7 @@ defineProps({
         :class="{ 'lg:max-w-[calc(100%-18rem)] xl:max-w-[calc(100%-22rem)]': identity }"
         style="--d: 150ms"
       >
+        <span v-if="identity" class="accent-glow size-1.5 rounded-full bg-accent" aria-hidden="true" />
         <template v-for="(label, i) in labels" :key="label">
           <span v-if="i" class="text-faint" aria-hidden="true">/</span>
           <span>{{ label }}</span>

@@ -7,6 +7,7 @@ import Icon from '../components/ui/Icon.vue'
 const paths = [
   {
     key: 'developer',
+    accent: 'accent-fsd',
     to: '/developer',
     icon: 'code',
     title: 'Full Stack Developer',
@@ -14,6 +15,7 @@ const paths = [
   },
   {
     key: 'creator',
+    accent: 'accent-video',
     to: '/creator',
     icon: 'clapper',
     title: 'Video Editor & Content Creator',
@@ -21,10 +23,11 @@ const paths = [
   }
 ]
 
-// Identity marks floating on the grid, one per role. Positions are % of the hero.
+// Identity marks floating on the grid, one per role. Positions are % of the hero;
+// `spot` centres the accent tint on the grid behind each mark.
 const marks = [
-  { key: 'developer', icon: 'code', style: { top: '20%', right: '22%', '--float': '17s' } },
-  { key: 'creator', icon: 'clapper', style: { top: '44%', right: '9%', '--float': '21s', '--float-delay': '-7s' } }
+  { key: 'developer', icon: 'code', accent: 'accent-fsd', spot: { '--spot-x': '76%', '--spot-y': '24%' }, style: { top: '20%', right: '22%', '--float': '17s' } },
+  { key: 'creator', icon: 'clapper', accent: 'accent-video', spot: { '--spot-x': '89%', '--spot-y': '48%' }, style: { top: '44%', right: '9%', '--float': '21s', '--float-delay': '-7s' } }
 ]
 
 // One shared interaction for both roles: selecting a row turns its icon (in the row
@@ -66,6 +69,16 @@ const year = new Date().getFullYear()
     <main id="main" class="relative flex flex-1 flex-col justify-center overflow-hidden pb-16 pt-32 md:pb-24 md:pt-40">
       <div class="grid-drift intro-fade pointer-events-none" style="--d: 750ms" aria-hidden="true">
         <div class="grid-lines" />
+        <!-- Monochrome by default; the hovered role tints the grid around its own mark. -->
+        <div
+          v-for="mark in marks"
+          :key="mark.key"
+          class="grid-spot transition-opacity duration-normal ease-out"
+          :class="[mark.accent, active === mark.key ? 'opacity-100' : 'opacity-0']"
+          :style="mark.spot"
+        >
+          <div class="grid-lines" />
+        </div>
       </div>
 
       <!-- Decorative: the two identities, resting on the grid. -->
@@ -77,9 +90,10 @@ const year = new Date().getFullYear()
           :style="mark.style"
         >
           <span
-            class="block transition-[color,scale] duration-slow ease-out"
+            class="block transition-[color,scale,filter] duration-slow ease-out"
             :class="[
-              active === mark.key ? '[scale:1.1] text-muted' : 'text-faint',
+              mark.accent,
+              active === mark.key ? 'accent-glow [scale:1.1] text-accent' : 'text-faint',
               { 'spin-once': spinning[mark.key] }
             ]"
             @animationend="spinning[mark.key] = false"
@@ -108,7 +122,7 @@ const year = new Date().getFullYear()
 
         <nav aria-label="Portfolios" class="intro mt-16 md:mt-20" style="--d: 520ms">
           <ul class="border-b border-border">
-            <li v-for="(path, i) in paths" :key="path.to" class="border-t border-border">
+            <li v-for="(path, i) in paths" :key="path.to" class="border-t border-border" :class="path.accent">
               <router-link
                 :to="path.to"
                 class="group grid grid-cols-[auto_1fr_auto] items-center gap-4 py-6 transition-colors duration-normal ease-out hover:bg-surface sm:gap-8 md:py-8 lg:grid-cols-12"
@@ -118,14 +132,18 @@ const year = new Date().getFullYear()
                 @blur="release(path.key)"
                 @pointerdown="spin(path.key)"
               >
-                <span class="tabular text-label text-faint lg:col-span-1 lg:pl-4" aria-hidden="true">
+                <span
+                  class="tabular text-label transition-colors duration-normal ease-out lg:col-span-1 lg:pl-4"
+                  :class="active === path.key ? 'text-accent' : 'text-faint'"
+                  aria-hidden="true"
+                >
                   {{ String(i + 1).padStart(2, '0') }}
                 </span>
                 <span class="flex items-start gap-4 sm:gap-6 lg:col-span-10">
                   <span
-                    class="mt-0.5 shrink-0 transition-[color,scale] duration-normal ease-out"
+                    class="mt-0.5 shrink-0 transition-[color,scale,filter] duration-normal ease-out"
                     :class="[
-                      active === path.key ? '[scale:1.1] text-foreground' : 'text-muted',
+                      active === path.key ? 'accent-glow [scale:1.1] text-accent' : 'text-muted',
                       { 'spin-once': spinning[path.key] }
                     ]"
                     aria-hidden="true"
@@ -141,7 +159,7 @@ const year = new Date().getFullYear()
                   </span>
                 </span>
                 <span class="flex justify-end lg:col-span-1 lg:pr-4">
-                  <Icon name="arrow-right" :size="20" class="text-muted transition-[transform,color] duration-normal ease-out group-hover:translate-x-1 group-hover:text-foreground" />
+                  <Icon name="arrow-right" :size="20" class="text-muted transition-[transform,color] duration-normal ease-out group-hover:translate-x-1 group-hover:text-accent group-focus-visible:text-accent" />
                 </span>
               </router-link>
             </li>

@@ -22,10 +22,15 @@ const attrs = computed(() => {
   return { type: 'button' }
 })
 
+// Hover adds the page's identity accent (see .accent-fsd / .accent-video) as a hairline ring
+// on primary, and as border + icon color on secondary. Outside a scoped page it stays monochrome.
 const variants = {
-  primary: 'bg-foreground text-background hover:bg-foreground/85',
-  secondary: 'border border-border text-foreground hover:border-border-strong hover:bg-surface-2'
+  primary:
+    'bg-foreground text-background hover:bg-foreground/85 hover:shadow-[0_0_0_1px_rgb(var(--accent)/0.6),0_0_24px_-6px_rgb(var(--accent)/var(--accent-glow))]',
+  secondary: 'border border-border text-foreground hover:border-accent/50 hover:bg-surface-2'
 }
+
+const iconColor = computed(() => (props.variant === 'secondary' ? 'group-hover/btn:text-accent' : ''))
 
 // Diagonal arrows nudge up-right; everything else nudges right.
 const iconMotion = computed(() =>
@@ -39,15 +44,15 @@ const iconMotion = computed(() =>
   <component
     :is="tag"
     v-bind="attrs"
-    class="group/btn inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-md px-5 text-sm font-medium transition-colors duration-fast ease-out"
+    class="group/btn inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-md px-5 text-sm font-medium transition-[color,background-color,border-color,box-shadow] duration-fast ease-out"
     :class="variants[variant]"
   >
     <slot />
     <Icon
       v-if="icon"
       :name="icon"
-      class="transition-transform duration-normal ease-out"
-      :class="iconMotion"
+      class="transition-[transform,color] duration-normal ease-out"
+      :class="[iconMotion, iconColor]"
     />
     <span v-if="external" class="sr-only">(opens in a new tab)</span>
   </component>

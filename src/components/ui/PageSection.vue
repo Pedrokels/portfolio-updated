@@ -14,7 +14,7 @@ defineProps({
     <div class="container-site">
       <header v-reveal class="grid gap-6 border-t border-border pt-6 lg:grid-cols-12 lg:gap-8">
         <p class="eyebrow flex items-center gap-3 self-start lg:col-span-3 lg:pt-2">
-          <span class="tabular text-faint" aria-hidden="true">{{ number }}</span>
+          <span class="tabular text-accent" aria-hidden="true">{{ number }}</span>
           <span>{{ label }}</span>
         </p>
 

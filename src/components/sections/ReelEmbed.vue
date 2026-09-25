@@ -80,15 +80,16 @@ const label = computed(() => `Reel ${String(props.index + 1).padStart(2, '0')}`)
         <span class="inline-flex items-center gap-2 rounded bg-background/90 px-3 py-2 text-sm font-medium text-foreground">
           <Icon name="play" :size="14" />
           Watch on Facebook
-          <Icon name="arrow-up-right" :size="14" class="transition-transform duration-normal ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          <Icon name="arrow-up-right" :size="14" class="transition-[transform,color] duration-normal ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
         </span>
         <span class="sr-only">{{ label }} (opens in a new tab)</span>
       </a>
 
       <span
         v-if="reel.featured"
-        class="pointer-events-none absolute left-3 top-3 rounded-sm bg-background/90 px-2 py-1 text-label font-medium uppercase text-foreground"
+        class="pointer-events-none absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-sm bg-background/90 px-2 py-1 text-label font-medium uppercase text-foreground"
       >
+        <span class="size-1.5 rounded-full bg-accent" aria-hidden="true" />
         Top reel
       </span>
     </div>
@@ -104,7 +105,7 @@ const label = computed(() => `Reel ${String(props.index + 1).padStart(2, '0')}`)
         :href="reel.url"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex size-9 shrink-0 items-center justify-center rounded text-muted transition-colors duration-fast hover:bg-surface-2 hover:text-foreground"
+        class="inline-flex size-9 shrink-0 items-center justify-center rounded text-muted transition-colors duration-fast hover:bg-surface-2 hover:text-accent"
         :aria-label="`Open ${label} on Facebook (opens in a new tab)`"
       >
         <Icon name="arrow-up-right" />
