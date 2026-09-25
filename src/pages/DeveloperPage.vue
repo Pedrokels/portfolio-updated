@@ -30,7 +30,7 @@ const resume = resumeLink(developer.resumeUrl, site.role)
 
     <main id="main">
       <HeroIntro
-        :labels="['Freelance Full Stack Developer', 'Remote · US-based Client', '2026 — Present']"
+        :labels="['Full Stack Developer']"
         identity="developer"
         :name-lines="['Peter John', 'Gerero']"
         :lead="developer.headline"

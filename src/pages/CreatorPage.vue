@@ -34,7 +34,7 @@ const videoSrc = (video) =>
 
     <main id="main">
       <HeroIntro
-        :labels="['Freelance Social Media Video Editor', 'Remote · US-based Client', '2026 — Present']"
+        :labels="['Content Creator — Video Editor']"
         identity="creator"
         :name-lines="['Pedro', 'Juan']"
         :lead="creator.headline"

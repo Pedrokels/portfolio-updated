@@ -56,8 +56,8 @@ export const developer = {
   stack: [
     { group: 'Languages', items: ['PHP', 'Python', 'JavaScript', 'HTML', 'CSS'] },
     { group: 'Backend', items: ['Laravel', 'Livewire', 'REST APIs', 'FastAPI', 'Flask'] },
-    { group: 'Frontend', items: ['Livewire', 'Alpine.js', 'Vue', 'Bootstrap', 'Tailwind CSS'] },
-    { group: 'Databases', items: ['MySQL', 'SQLite'] },
+    { group: 'Frontend', items: ['Livewire', 'Alpine.js', 'Vue.js', 'Bootstrap', 'Tailwind CSS'] },
+    { group: 'Databases', items: ['MySQL', 'PostgreSQL', 'SQLite'] },
     { group: 'Machine learning', items: ['scikit-learn', 'XGBoost', 'pandas', 'NumPy', 'Matplotlib', 'Seaborn'] },
     { group: 'GIS & Mapping', items: ['Mapbox GL JS', 'deck.gl', 'PostGIS', 'GeoJSON', 'Spatial visualisation'] },
     { group: 'Tools', items: ['Git', 'GitHub', 'Postman', 'VS Code', 'Google Cloud', 'Jupyter', 'PyCharm'] }
