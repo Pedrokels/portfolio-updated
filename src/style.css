@@ -1,41 +1,356 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+/* ------------------------------------------------------------------ */
+/* Design tokens                                                        */
+/* Colors are stored as RGB channels so Tailwind can apply alpha.       */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  :root {
+    color-scheme: light;
+
+    --background: 255 255 255;    /* #FFFFFF */
+    --surface: 250 250 250;       /* #FAFAFA */
+    --surface-2: 245 245 245;     /* #F5F5F5 */
+    --border: 234 234 234;        /* #EAEAEA */
+    --border-strong: 212 212 212; /* #D4D4D4 */
+    --foreground: 17 17 17;       /* #111111 */
+    --muted: 102 102 102;         /* #666666 — 5.7:1 on white */
+    --faint: 160 160 160;         /* decorative only (numbers, rules) */
+
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --duration-fast: 200ms;
+    --duration-normal: 400ms;
+    --duration-slow: 700ms;
+
+    --header-height: 4rem;
+  }
+
+  :root.dark {
+    color-scheme: dark;
+
+    --background: 10 10 10;       /* #0A0A0A */
+    --surface: 17 17 17;          /* #111111 */
+    --surface-2: 24 24 24;        /* #181818 */
+    --border: 36 36 36;           /* #242424 */
+    --border-strong: 51 51 51;    /* #333333 */
+    --foreground: 245 245 245;    /* #F5F5F5 */
+    --muted: 154 154 154;         /* #9A9A9A — 7.4:1 on #0A0A0A */
+    --faint: 90 90 90;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply min-h-screen overflow-x-hidden bg-background font-sans text-base text-foreground antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+
+  #app {
+    @apply min-h-screen;
+  }
+
+  [id] {
+    scroll-margin-top: calc(var(--header-height) + 1.5rem);
+  }
+
+  ::selection {
+    background-color: rgb(var(--foreground));
+    color: rgb(var(--background));
+  }
+
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--foreground));
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  img {
+    @apply select-none;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+/* Applied for ~400ms while switching themes so every token-driven surface fades together. */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition-property: background-color, border-color, color, fill, stroke !important;
+  transition-duration: var(--duration-normal) !important;
+  transition-timing-function: var(--ease-out) !important;
+  transition-delay: 0ms !important;
 }
 
-body {
-  min-height: 100vh;
-  overflow-x: hidden;
-  background-color: #f7f7f1;
-  color: #0a0a0a;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ------------------------------------------------------------------ */
+/* Shared primitives                                                    */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-6 md:px-12;
+  }
+
+  /* Small uppercase metadata label — the only "decorative" type style. */
+  .eyebrow {
+    @apply text-label font-medium uppercase text-muted;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Animated underline for inline and footer links. */
+  .link {
+    @apply relative inline-flex items-center gap-1 text-foreground;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition: background-size var(--duration-normal) var(--ease-out), color var(--duration-fast) var(--ease-out);
+  }
+
+  .link:hover,
+  .link:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .link-muted {
+    @apply text-muted hover:text-foreground focus-visible:text-foreground;
+  }
+
+  /* Screenshots stay monochrome on hover-capable devices until interacted with. */
+  @media (hover: hover) {
+    .shot {
+      filter: grayscale(1);
+      transition: filter var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+    }
+
+    .group:hover .shot,
+    .group:focus-within .shot {
+      filter: grayscale(0);
+    }
+  }
+
+  /* Hairline grid used behind the hero. Masked so it fades into the page. */
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(var(--border)) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--border)) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .grid-mask {
+    mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 20%, transparent 75%);
+  }
+
+  .grid-backdrop {
+    @apply grid-lines grid-mask;
+  }
+
+  /* Drifting grid (homepage). The mask stays on the wrapper; only an oversized inner
+     layer moves — exactly one 64px cell per loop, so the restart frame is identical. */
+  .grid-drift {
+    @apply grid-mask absolute inset-0 overflow-hidden;
+  }
+
+  .grid-drift > .grid-lines {
+    position: absolute;
+    inset: 0 -64px -64px 0;
+    animation: grid-drift 22s linear infinite;
+    will-change: transform;
+  }
 }
 
-html.dark body {
-  background-color: #050505;
-  color: #f5f5f5;
+@keyframes grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    /* bottom-right → top-left */
+    transform: translate3d(-64px, -64px, 0);
+  }
 }
 
-#app {
-  min-height: 100vh;
+/* Identity marks on the homepage grid: a slow drift and breath, never in sync with each other. */
+@keyframes mark-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(-6px, -10px, 0);
+    opacity: 1;
+  }
 }
 
-::selection {
-  background-color: #111111;
-  color: #ffffff;
+.mark-float {
+  animation: mark-float var(--float, 16s) ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
 }
 
-html.dark ::selection {
-  background-color: #f5f5f5;
-  color: #050505;
+/* Page identity illustration (developer / creator heroes): a slow vertical float.
+   The side panel floats on the same curve, half a cycle apart. */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+.identity-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+.identity-float-panel {
+  animation: float-y 6s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+/* One deliberate turn when a role is selected. Uses the `rotate` property so it
+   composes with any transform (float, scale) instead of overriding it. */
+@keyframes spin-once {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+.spin-once {
+  animation: spin-once 900ms var(--ease-out);
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion system                                                        */
+/* intro  — one-off entrance sequence on page load (stagger via --d)    */
+/* reveal — scroll-triggered fade-up (see src/directives/reveal.js)     */
+/* page   — route transition                                            */
+/* ------------------------------------------------------------------ */
+
+@keyframes intro {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* Navbar: no blur here — a filter on the header would interfere with its backdrop blur. */
+@keyframes intro-nav {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.intro {
+  animation: intro var(--duration-slow) var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.intro-nav {
+  animation: intro-nav var(--duration-slow) var(--ease-out) both;
+}
+
+.intro-fade {
+  animation: fade-in 1200ms var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition:
+    opacity var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
+}
+
+.page-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro,
+  .intro-nav,
+  .intro-fade,
+  .grid-drift > .grid-lines,
+  .mark-float,
+  .spin-once,
+  .identity-float,
+  .identity-float-panel {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .page-enter-active,
+  .page-leave-active {
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+  }
 }
