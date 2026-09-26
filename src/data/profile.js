@@ -15,7 +15,8 @@ import nutritionMain from '../assets/images/projects/nutritiondatainaclick/main_
 import nutritionPrediction from '../assets/images/projects/nutritiondatainaclick/prediction_module.jpg'
 import bimsLogin from '../assets/images/projects/bims/bimslogin.jpg'
 import bimsDashboard from '../assets/images/projects/bims/bims.png'
-import dvsLogin from '../assets/images/projects/dvs/dvslogin.png'
+import sparxplugHome from '../assets/images/projects/sparxplug/home.png'
+import sparxplugEcosystem from '../assets/images/projects/sparxplug/ecosystem.png'
 import edcsListings from '../assets/images/projects/edcsbiochem/dashboard.png'
 import helpdeskRequest from '../assets/images/projects/helpdesk/ithelpdesk.png'
 import helpdeskAdmin from '../assets/images/projects/ithelpdesk/itadmin.png'
@@ -54,17 +55,32 @@ export const developer = {
   ],
 
   stack: [
-    { group: 'Languages', items: ['PHP', 'Python', 'JavaScript', 'HTML', 'CSS'] },
-    { group: 'Backend', items: ['Laravel', 'Livewire', 'REST APIs', 'FastAPI', 'Flask'] },
-    { group: 'Frontend', items: ['Livewire', 'Alpine.js', 'Vue.js', 'Bootstrap', 'Tailwind CSS'] },
+    { group: 'Languages', items: ['PHP', 'Python', 'JavaScript', 'TypeScript', 'HTML', 'CSS'] },
+    { group: 'Backend', items: ['Laravel', 'Livewire', 'REST APIs', 'FastAPI', 'Flask', 'WordPress'] },
+    { group: 'Frontend', items: ['Livewire', 'Alpine.js', 'Vue.js', 'React.js', 'Next.js', 'Bootstrap', 'Tailwind CSS'] },
     { group: 'Databases', items: ['MySQL', 'PostgreSQL', 'SQLite'] },
     { group: 'Machine learning', items: ['scikit-learn', 'XGBoost', 'pandas', 'NumPy', 'Matplotlib', 'Seaborn'] },
     { group: 'GIS & Mapping', items: ['Mapbox GL JS', 'deck.gl', 'PostGIS', 'GeoJSON', 'Spatial visualisation'] },
-    { group: 'Tools', items: ['Git', 'GitHub', 'Postman', 'VS Code', 'Google Cloud', 'Jupyter', 'PyCharm'] }
+    { group: 'Tools', items: ['Git', 'GitHub', 'Postman', 'VS Code', 'Google Cloud', 'Jupyter', 'PyCharm'] },
+    { group: 'AI tools', items: ['Claude', 'ChatGPT', 'Gemini'] }
   ],
 
   // Featured projects, in résumé order. Tags are the stacks listed on the résumé.
   projects: [
+    {
+      slug: 'sparxplug',
+      name: 'Sparx Plug Ecosystem',
+      kind: 'Electrical trade network',
+      summary:
+        'A network for the electrical trade where contractors hire, electricians find work, instructors fill classes, and brands reach the trade.',
+      detail:
+        'I built the ecosystem web app at ecosystem.sparxplug.com: role-based accounts for contractors, electricians, instructors, and brands, with job posting and hiring, job alerts, direct messaging, and instructor and brand ads.',
+      tags: ['React.js', 'Next.js', 'TypeScript', 'PostgreSQL', 'Tailwind CSS'],
+      images: [
+        { src: sparxplugHome, alt: 'Sparx Plug home page: The Network Built for the Electrical Trade, linking contractors, electricians, instructors, and brands' },
+        { src: sparxplugEcosystem, alt: 'Sparx Plug Ecosystem get-started screen with create account and log in options' }
+      ]
+    },
     {
       slug: 'paligid',
       name: 'PALIGID Mapping System',
@@ -76,16 +92,6 @@ export const developer = {
       role: 'Contributor',
       tags: ['Laravel', 'Livewire', 'PHP', 'MySQL', 'Mapbox GL JS', 'deck.gl', 'PostGIS'],
       images: []
-    },
-    {
-      slug: 'dvs',
-      name: 'Data Validation System',
-      kind: 'Research data platform',
-      summary: 'A validation platform for researchers that automates data validation.',
-      detail:
-        'Integrates multiple nutrition information systems through REST APIs, so data is checked in one place.',
-      tags: ['PHP', 'Laravel', 'Livewire', 'JavaScript', 'Bootstrap', 'MySQL'],
-      images: [{ src: dvsLogin, alt: 'Data Validation System sign-in screen' }]
     },
     {
       slug: 'enutrition',
