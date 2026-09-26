@@ -119,7 +119,10 @@ onBeforeUnmount(() => {
         </nav>
 
         <slot name="actions" />
-        <ThemeToggle />
+        <!-- On small screens with a menu, the switch moves into the menu so the name isn't squeezed. -->
+        <div :class="links.length ? 'hidden md:flex' : 'flex'">
+          <ThemeToggle />
+        </div>
 
         <button
           v-if="links.length"
@@ -158,6 +161,10 @@ onBeforeUnmount(() => {
               <span class="tabular text-label text-accent" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
               {{ link.label }}
             </a>
+          </li>
+          <li class="mt-4 flex items-center justify-between border-t border-border pt-5">
+            <span class="text-sm text-muted">Theme</span>
+            <ThemeToggle />
           </li>
         </ul>
       </nav>

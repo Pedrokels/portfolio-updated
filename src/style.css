@@ -122,6 +122,13 @@
   transition-delay: 0ms !important;
 }
 
+/* Theme switch reveal: drop the default crossfade so the circular clip (driven in useTheme) reads cleanly. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
 /* ------------------------------------------------------------------ */
 /* Shared primitives                                                    */
 /* ------------------------------------------------------------------ */
