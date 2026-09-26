@@ -36,7 +36,17 @@ const gallery = ref(null)
 
       <DotList :items="project.tags" class="mt-6 text-sm text-muted" />
 
-      <div class="mt-8">
+      <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3">
+        <a
+          v-if="project.url"
+          :href="project.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group/visit inline-flex items-center gap-2 text-sm font-medium text-foreground"
+        >
+          <span class="link">Visit site</span>
+          <Icon name="arrow-up-right" class="transition-[transform,color] duration-normal ease-out group-hover/visit:-translate-y-0.5 group-hover/visit:translate-x-0.5 group-hover/visit:text-accent" />
+        </a>
         <button
           v-if="hasImages"
           type="button"

@@ -71,6 +71,7 @@ export const developer = {
       slug: 'sparxplug',
       name: 'Sparx Plug Ecosystem',
       kind: 'Electrical trade network',
+      url: 'https://sparxplug.com/',
       summary:
         'A network for the electrical trade where contractors hire, electricians find work, instructors fill classes, and brands reach the trade.',
       detail:
